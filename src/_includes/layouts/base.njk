@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ title }} | {{ site.name }}</title>
+  <meta name="description" content="{{ description or site.description }}">
+  <meta name="theme-color" content="#0d1117">
+  <link rel="stylesheet" href="/assets/css/style.css">
+
+  {% if canonical %}
+  <link rel="canonical" href="{{ canonical }}">
+  {% endif %}
+
+  <!-- Schema: Organization -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "{{ site.name }}",
+    "url": "https://defenseaiweekly.com",
+    "description": "{{ site.description }}",
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "email": "editor@defenseaiweekly.com",
+      "contactType": "Editorial"
+    }
+  }
+  </script>
+
+  <!-- Schema: BreadcrumbList -->
+  {% if breadcrumbs %}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {% for crumb in breadcrumbs %}
+      {
+        "@type": "ListItem",
+        "position": {{ loop.index }},
+        "name": "{{ crumb.name }}",
+        "item": "{{ crumb.url }}"
+      }{% if not loop.last %},{% endif %}
+      {% endfor %}
+    ]
+  }
+  </script>
+  {% endif %}
+
+  <!-- Schema: FAQPage -->
+  {% if faqs %}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {% for faq in faqs %}
+      {
+        "@type": "Question",
+        "name": "{{ faq.question | safe }}",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "{{ faq.answer | safe }}"
+        }
+      }{% if not loop.last %},{% endif %}
+      {% endfor %}
+    ]
+  }
+  </script>
+  {% endif %}
+</head>
+<body>
+  <header class="def-header">
+    <nav class="def-nav">
+      <a href="/" class="def-logo">
+        <span class="def-logo__icon">⚡</span>
+        {{ site.name }}
+      </a>
+      <ul class="def-menu">
+        <li class="def-menu__item">
+          <a href="/threat-intelligence/" class="def-menu__link">Intelligence</a>
+          <div class="def-dropdown">
+            <a href="/threat-intelligence/" class="def-dropdown__item">Threat Intelligence</a>
+            <a href="/signals-analysis/" class="def-dropdown__item">Signals Analysis</a>
+            <a href="/geospatial-intelligence/" class="def-dropdown__item">Geospatial Intel</a>
+          </div>
+        </li>
+        <li class="def-menu__item">
+          <a href="/maritime/" class="def-menu__link">Maritime</a>
+          <div class="def-dropdown">
+            <a href="/maritime/" class="def-dropdown__item">Domain Awareness</a>
+            <a href="/naval-operations/" class="def-dropdown__item">Naval Operations</a>
+            <a href="/shipping-intelligence/" class="def-dropdown__item">Shipping lanes</a>
+          </div>
+        </li>
+        <li class="def-menu__item">
+          <a href="/osint/" class="def-menu__link">OSINT</a>
+          <div class="def-dropdown">
+            <a href="/osint/" class="def-dropdown__item">Open Source Intel</a>
+            <a href="/social-media-intelligence/" class="def-dropdown__item">Social Media</a>
+            <a href="/dark-web/" class="def-dropdown__item">Dark Web</a>
+          </div>
+        </li>
+        <li class="def-menu__item">
+          <a href="/analysis/" class="def-menu__link">Analysis</a>
+          <div class="def-dropdown">
+            <a href="/analysis/" class="def-dropdown__item">In-Depth Reports</a>
+            <a href="/weekly-digest/" class="def-dropdown__item">Weekly Digests</a>
+            <a href="/expert-commentary/" class="def-dropdown__item">Expert Commentary</a>
+          </div>
+        </li>
+        <li class="def-menu__item">
+          <a href="/about/" class="def-menu__link">About</a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="def-main">
+    {{ content | safe }}
+  </main>
+
+  <footer class="def-footer">
+    <div class="def-footer__inner">
+      <div class="def-footer__brand">
+        <div class="def-footer__logo">
+          <span class="def-logo__icon">⚡</span>
+          {{ site.name }}
+        </div>
+        <p class="def-footer__desc">
+          A curated digest delivering actionable defense intelligence at the intersection of artificial intelligence, autonomous systems, and national security.
+        </p>
+      </div>
+      <div>
+        <h4 class="def-footer__col-title">Coverage</h4>
+        <ul class="def-footer__links">
+          <li><a href="/threat-intelligence/">Threat Intelligence</a></li>
+          <li><a href="/maritime/">Maritime Domain</a></li>
+          <li><a href="/osint/">OSINT</a></li>
+          <li><a href="/signals-analysis/">Signals Analysis</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="def-footer__col-title">Resources</h4>
+        <ul class="def-footer__links">
+          <li><a href="/weekly-digest/">Weekly Digest</a></li>
+          <li><a href="/analysis/">Analysis</a></li>
+          <li><a href="/archive/">Archive</a></li>
+          <li><a href="/subscribe/">Subscribe</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="def-footer__col-title">Contact</h4>
+        <ul class="def-footer__links">
+          <li><a href="mailto:editor@defenseaiweekly.com">editor@defenseaiweekly.com</a></li>
+          <li><a href="/press/">Press Inquiries</a></li>
+          <li><a href="/tips/">Tip Line</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="def-footer__bottom">
+      <span>© 2026 {{ site.name }}. All rights reserved.</span>
+      <div class="def-footer__legal">
+        <a href="/privacy/">Privacy</a>
+        <a href="/terms/">Terms</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

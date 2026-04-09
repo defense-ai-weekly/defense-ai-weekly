@@ -1,0 +1,19 @@
+{
+  "name": "Defense AI Weekly",
+  "description": "A curated defense AI digest covering threat intelligence, maritime domain awareness, OSINT, and signals analysis.",
+  "url": "https://defenseaiweekly.com",
+  "og_image": "",
+  "ga4_measurement_id": "",
+  "type": "company",
+  "tagline": "Defense AI Weekly",
+  "social": {
+    "github": "",
+    "linkedin": "",
+    "twitter": ""
+  },
+  "org": {
+    "founding_year": "2026",
+    "industry": "Defense Intelligence Publishing",
+    "contact_email": "editor@defenseaiweekly.com"
+  }
+}
