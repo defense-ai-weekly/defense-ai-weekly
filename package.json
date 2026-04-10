@@ -7,7 +7,12 @@
     "build": "eleventy",
     "clean": "rm -rf _site"
   },
-  "keywords": ["11ty", "eleventy", "starter", "amplify"],
+  "keywords": [
+    "11ty",
+    "eleventy",
+    "starter",
+    "amplify"
+  ],
   "license": "MIT",
   "devDependencies": {
     "@11ty/eleventy": "^2.0.1"
