@@ -33,7 +33,7 @@ Defense organizations have developed rigorous evaluation frameworks to assess LL
 
 ## The Evaluation Challenge
 
-Ground truth is often unavailable for defense-relevant tasks, making model comparison difficult. LLM performance on defense tasks can degrade by 30 to 50 percent when inputs differ from training conditions. Properties beyond accuracy—security, robustness, and compliance—require specialized evaluation methodologies.
+Ground truth is often unavailable for defense-relevant tasks, making model comparison difficult. LLM performance on defense tasks can degrade by 30 to 50 percent when inputs differ from training conditions. Properties beyond accuracy—security, robustness, and compliance—require specialized evaluation methodologies. Defense organizations rely on expert consensus as a proxy for ground truth, which introduces its own limitations for model selection.
 
 LLM evaluation presents unique challenges that complicate assessment. Ground truth is often unavailable, distribution shift degrades performance, and evaluation must assess properties beyond accuracy that commercial benchmarks do not address.
 
@@ -47,7 +47,7 @@ According to the [Journal of Defense Research](https://academic.oup.com/jdr/), t
 
 ## Capability Evaluation Frameworks
 
-Task-specific benchmarks cover intelligence analysis including document summarization and preliminary assessment generation. Reasoning benchmarks correlate imperfectly with real-world performance. Domain-specific knowledge evaluation identifies significant gaps even in models excelling on general benchmarks.
+Task-specific benchmarks cover intelligence analysis including document summarization and preliminary assessment generation. Reasoning benchmarks correlate imperfectly with real-world performance. Domain-specific knowledge evaluation identifies significant gaps even in models excelling on general benchmarks. The DARPA LlamaDA program established benchmarks covering 12 capability dimensions including reasoning, domain knowledge, robustness, and security properties.
 
 Assessing LLM capabilities requires structured frameworks covering relevant task dimensions. Task-specific benchmarks, reasoning evaluations, and domain knowledge testing form the core of capability assessment.
 
@@ -61,7 +61,7 @@ According to [DARPA](https://www.darpa.mil/), the LlamaDA program developed benc
 
 ## Security Evaluation
 
-Red-teaming must cover prompt injection, attempts to generate classified information, handling procedure violations, and attempts to cause harmful real-world effects. Commercial models remain vulnerable to jailbreak attempts despite safety training, requiring additional hardening for defense deployments.
+Red-teaming must cover prompt injection, attempts to generate classified information, handling procedure violations, and attempts to cause harmful real-world effects. Commercial models remain vulnerable to jailbreak attempts despite safety training, requiring additional hardening for defense deployments. ODNI policy mandates that red-teaming occur before any operational deployment and periodically throughout the system lifecycle.
 
 Defense LLMs must meet stringent security requirements that commercial applications do not share. Red-teaming, adversarial testing, and data exfiltration assessment form the security evaluation framework.
 
@@ -77,7 +77,7 @@ The intelligence community conducts red-teaming exercises before operational dep
 
 ## Robustness Evaluation
 
-Out-of-distribution robustness varies dramatically across models and remains a significant concern for operational deployment. Performance can degrade significantly when operational conditions differ from evaluation conditions. Stress testing reveals failure modes invisible under normal conditions.
+Out-of-distribution robustness varies dramatically across models and remains a significant concern for operational deployment. Performance can degrade significantly when operational conditions differ from evaluation conditions. Stress testing reveals failure modes invisible under normal conditions. Army Research Laboratory studies document performance drops of 30 to 50 percent when inputs shift meaningfully from evaluation conditions.
 
 Models must perform reliably even when operational inputs differ from training conditions. Out-of-distribution testing, adversarial input testing, and stress testing form the robustness evaluation framework.
 
@@ -91,7 +91,7 @@ Models must perform reliably even when operational inputs differ from training c
 
 ## Compliance and Policy Evaluation
 
-Chain-of-custody evaluation ensures model outputs maintain evidentiary integrity for intelligence products used in legal proceedings. AI systems operating on classified networks must implement controls preventing inadvertent spillage per NSA information security policy.
+Chain-of-custody evaluation ensures model outputs maintain evidentiary integrity for intelligence products used in legal proceedings. AI systems operating on classified networks must implement controls preventing inadvertent spillage per NSA information security policy. Documenting model behavior and maintaining audit trails are mandatory for both evidentiary and security compliance in operational deployments.
 
 Defense LLMs must operate within established policy and legal frameworks. Chain-of-custody, classification handling, and privacy impact assessment form the compliance evaluation framework.
 
@@ -105,7 +105,7 @@ Defense LLMs must operate within established policy and legal frameworks. Chain-
 
 ## Operational Testing
 
-Pilot programs test models in contained operational settings with defined criteria for scaling or termination. User acceptance testing identifies workflow integration challenges invisible to system developers. Operational security testing simulates actual adversary capabilities beyond laboratory red-teaming.
+Pilot programs test models in contained operational settings with defined criteria for scaling or termination. User acceptance testing identifies workflow integration challenges invisible to system developers. Operational security testing simulates actual adversary capabilities beyond laboratory red-teaming. CDAO operational guidance requires pilot programs to demonstrate measurable user productivity gains before full deployment authorization.
 
 Laboratory evaluation must be supplemented with operational testing in realistic environments. Pilot programs, user acceptance testing, and performance monitoring form the operational testing framework.
 
