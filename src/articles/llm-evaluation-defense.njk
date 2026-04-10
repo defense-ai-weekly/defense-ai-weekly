@@ -33,9 +33,7 @@ Defense organizations have developed rigorous evaluation frameworks to assess LL
 
 ## The Evaluation Challenge
 
-Ground truth is often unavailable for defense-relevant tasks, making model comparison difficult. LLM performance on defense tasks can degrade by 30 to 50 percent when inputs differ from training conditions. Properties beyond accuracy—security, robustness, and compliance—require specialized evaluation methodologies. Defense organizations rely on expert consensus as a proxy for ground truth, which introduces its own limitations for model selection.
-
-LLM evaluation presents unique challenges that complicate assessment. Ground truth is often unavailable, distribution shift degrades performance, and evaluation must assess properties beyond accuracy that commercial benchmarks do not address.
+Ground truth is often unavailable for defense-relevant tasks, making model comparison difficult. LLM performance on defense tasks can degrade by 30 to 50 percent when inputs differ from training conditions. Properties beyond accuracy—security, robustness, and compliance—require specialized evaluation methodologies that commercial benchmarks do not address. Defense organizations rely on expert consensus as a proxy for ground truth, introducing limitations for model selection.
 
 **Ground truth is often unavailable for defense-relevant tasks.** Unlike benchmark tasks with known correct answers, many defense applications involve judgment calls where experts disagree. A model that generates reasonable-seeming intelligence assessments may nonetheless contain subtle errors that trained analysts would catch but automated evaluation cannot detect.
 
@@ -47,7 +45,7 @@ According to the [Journal of Defense Research](https://academic.oup.com/jdr/), t
 
 ## Capability Evaluation Frameworks
 
-Task-specific benchmarks cover intelligence analysis including document summarization and preliminary assessment generation. Reasoning benchmarks correlate imperfectly with real-world performance. Domain-specific knowledge evaluation identifies significant gaps even in models excelling on general benchmarks. The DARPA LlamaDA program established benchmarks covering 12 capability dimensions including reasoning, domain knowledge, robustness, and security properties.
+Task-specific benchmarks cover intelligence analysis including document summarization and preliminary assessment generation. Reasoning benchmarks correlate imperfectly with real-world performance. Domain-specific knowledge evaluation identifies significant gaps even in models excelling on general benchmarks. The DARPA LlamaDA program established benchmarks covering 12 capability dimensions including reasoning, domain knowledge, robustness, and security properties — these benchmarks form the basis for structured capability assessment across defense-relevant tasks.
 
 Assessing LLM capabilities requires structured frameworks covering relevant task dimensions. Task-specific benchmarks, reasoning evaluations, and domain knowledge testing form the core of capability assessment.
 
@@ -119,9 +117,7 @@ Laboratory evaluation must be supplemented with operational testing in realistic
 
 ## Benchmark Limitations
 
-Models optimized for benchmarks may not perform well on actual tasks due to Goodhart's Law. Benchmark gaming explains much apparent progress in LLM capabilities. Human evaluation remains the gold standard but scales poorly, driving interest in hybrid automated-human evaluation approaches.
-
-Defense organizations must recognize benchmark limitations when evaluating LLM suitability. Goodhart's Law, benchmark obsolescence, and transparency issues constrain the utility of standard benchmarks.
+Models optimized for benchmarks may not perform well on actual tasks due to Goodhart's Law. Benchmark obsolescence and transparency issues further constrain utility. Human evaluation remains the gold standard but scales poorly — RAND documents a 2-3 year lag between operational need emergence and benchmark availability. Defense organizations must recognize these limitations when evaluating LLM suitability.
 
 **Goodhart's Law applies: when a measure becomes a target, it ceases to be a good measure.** Models optimized for benchmarks may not perform well on actual tasks. According to the [Journal of AI Research](https://www.jair.org/), benchmark gaming explains much apparent progress in LLM capabilities.
 
@@ -133,7 +129,7 @@ Defense organizations must recognize benchmark limitations when evaluating LLM s
 
 ## Recommended Evaluation Framework
 
-Defense organizations deploying LLMs should implement structured evaluation covering multiple dimensions. A phased approach enables early identification of issues while managing deployment risks.
+Defense organizations deploying LLMs should implement structured evaluation covering multiple dimensions. A phased approach — capability assessment, security testing, compliance evaluation, and operational validation — enables early identification of issues while managing deployment risks per the DoD Responsible AI Implementation Pathway.
 
 **Phase 1: Capability Assessment** covers task-specific benchmark evaluation, reasoning and knowledge testing, and domain-specific capability assessment. Phase 2 addresses security through red-teaming exercises, adversarial robustness testing, and data exfiltration risk assessment. Phase 3 focuses on compliance with policy evaluation, chain-of-custody testing, and privacy impact assessment. Phase 4 provides operational validation through pilot program execution, user acceptance testing, and performance monitoring setup.
 
