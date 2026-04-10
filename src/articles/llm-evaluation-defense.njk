@@ -33,6 +33,8 @@ Defense organizations have developed rigorous evaluation frameworks to assess LL
 
 ## The Evaluation Challenge
 
+Ground truth is often unavailable for defense-relevant tasks, making model comparison difficult. LLM performance on defense tasks can degrade by 30 to 50 percent when inputs differ from training conditions. Properties beyond accuracy—security, robustness, and compliance—require specialized evaluation methodologies.
+
 LLM evaluation presents unique challenges that complicate assessment. Ground truth is often unavailable, distribution shift degrades performance, and evaluation must assess properties beyond accuracy that commercial benchmarks do not address.
 
 **Ground truth is often unavailable for defense-relevant tasks.** Unlike benchmark tasks with known correct answers, many defense applications involve judgment calls where experts disagree. A model that generates reasonable-seeming intelligence assessments may nonetheless contain subtle errors that trained analysts would catch but automated evaluation cannot detect.
@@ -45,6 +47,8 @@ According to the [Journal of Defense Research](https://academic.oup.com/jdr/), t
 
 ## Capability Evaluation Frameworks
 
+Task-specific benchmarks cover intelligence analysis including document summarization and preliminary assessment generation. Reasoning benchmarks correlate imperfectly with real-world performance. Domain-specific knowledge evaluation identifies significant gaps even in models excelling on general benchmarks.
+
 Assessing LLM capabilities requires structured frameworks covering relevant task dimensions. Task-specific benchmarks, reasoning evaluations, and domain knowledge testing form the core of capability assessment.
 
 **Task-specific benchmarks measure performance on defined operations.** For intelligence summarization, benchmark datasets contain documents with expert-generated summaries. For threat assessment, benchmarks contain scenarios with known threat levels. Models receive scores based on agreement with expert assessments.
@@ -56,6 +60,8 @@ According to [DARPA](https://www.darpa.mil/), the LlamaDA program developed benc
 **Domain knowledge evaluation tests relevant factual recall.** Defense LLMs must understand military doctrine, weapons systems, and geopolitical context. Evaluation datasets contain questions testing this knowledge. According to the [RAND Corporation](https://www.rand.org/), domain-specific knowledge evaluation identifies significant gaps even in models excelling on general benchmarks.
 
 ## Security Evaluation
+
+Red-teaming must cover prompt injection, attempts to generate classified information, handling procedure violations, and attempts to cause harmful real-world effects. Commercial models remain vulnerable to jailbreak attempts despite safety training, requiring additional hardening for defense deployments.
 
 Defense LLMs must meet stringent security requirements that commercial applications do not share. Red-teaming, adversarial testing, and data exfiltration assessment form the security evaluation framework.
 
@@ -71,6 +77,8 @@ The intelligence community conducts red-teaming exercises before operational dep
 
 ## Robustness Evaluation
 
+Out-of-distribution robustness varies dramatically across models and remains a significant concern for operational deployment. Performance can degrade significantly when operational conditions differ from evaluation conditions. Stress testing reveals failure modes invisible under normal conditions.
+
 Models must perform reliably even when operational inputs differ from training conditions. Out-of-distribution testing, adversarial input testing, and stress testing form the robustness evaluation framework.
 
 **Out-of-distribution testing evaluates behavior on inputs outside training distribution.** Real-world inputs inevitably differ from training data. According to [MITRE Corporation](https://www.mitre.org/), out-of-distribution robustness varies dramatically across models and remains a significant concern for operational deployment.
@@ -82,6 +90,8 @@ Models must perform reliably even when operational inputs differ from training c
 **Stress testing evaluates behavior at operational boundaries.** High-volume processing, extended operation, and resource constraints can degrade model performance. According to [DARPA's explainable AI program](https://www.darpa.mil/), stress testing reveals failure modes invisible under normal conditions.
 
 ## Compliance and Policy Evaluation
+
+Chain-of-custody evaluation ensures model outputs maintain evidentiary integrity for intelligence products used in legal proceedings. AI systems operating on classified networks must implement controls preventing inadvertent spillage per NSA information security policy.
 
 Defense LLMs must operate within established policy and legal frameworks. Chain-of-custody, classification handling, and privacy impact assessment form the compliance evaluation framework.
 
@@ -95,6 +105,8 @@ Defense LLMs must operate within established policy and legal frameworks. Chain-
 
 ## Operational Testing
 
+Pilot programs test models in contained operational settings with defined criteria for scaling or termination. User acceptance testing identifies workflow integration challenges invisible to system developers. Operational security testing simulates actual adversary capabilities beyond laboratory red-teaming.
+
 Laboratory evaluation must be supplemented with operational testing in realistic environments. Pilot programs, user acceptance testing, and performance monitoring form the operational testing framework.
 
 **Pilot programs test models in contained operational settings.** Before full deployment, models undergo pilot testing with limited scope. According to [CDAO implementation guidance](https://www.ai.mil/), pilot programs must include performance monitoring, user feedback collection, and defined criteria for scaling or termination.
@@ -106,6 +118,8 @@ Laboratory evaluation must be supplemented with operational testing in realistic
 **Performance monitoring in production identifies degradation over time.** Model performance can degrade as operational conditions evolve. According to [DoD AI maintenance guidance](https://www.ai.mil/), continuous monitoring is required to detect and address performance drift.
 
 ## Benchmark Limitations
+
+Models optimized for benchmarks may not perform well on actual tasks due to Goodhart's Law. Benchmark gaming explains much apparent progress in LLM capabilities. Human evaluation remains the gold standard but scales poorly, driving interest in hybrid automated-human evaluation approaches.
 
 Defense organizations must recognize benchmark limitations when evaluating LLM suitability. Goodhart's Law, benchmark obsolescence, and transparency issues constrain the utility of standard benchmarks.
 
