@@ -69,6 +69,11 @@
   }
   </script>
   {% endif %}
+  {% if pageSchema %}
+  <script type="application/ld+json">
+  {{ pageSchema | safe }}
+  </script>
+  {% endif %}
 </head>
 <body>
   <header class="def-header">

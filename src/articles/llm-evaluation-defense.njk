@@ -23,6 +23,29 @@ faqs:
     answer: "No single benchmark captures all relevant capabilities. Defense organizations should use multiple complementary benchmarks, supplement automated evaluation with human expert assessment, and conduct operational testing in realistic environments before deployment."
   - question: "What evaluation frameworks exist specifically for defense AI?"
     answer: "The DoD's Chief Digital and Artificial Intelligence Office published the Responsible AI Guidelines and Implementation Pathway. NIST Special Publication 1270 addresses AI measurement and evaluation. The Space Force's AI Evaluation Framework represents the first service-specific approach."
+pageSchema: |2
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Evaluating LLMs for Defense Applications",
+    "description": "Defense organizations require rigorous evaluation frameworks to assess large language model suitability for intelligence, operational, and administrative tasks.",
+    "image": "https://www.defenseaiweekly.com/og-default.png",
+    "author": {
+      "@type": "Organization",
+      "name": "Defense AI Weekly Editorial"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Defense AI Weekly",
+      "url": "https://www.defenseaiweekly.com"
+    },
+    "datePublished": "2026-04-09",
+    "dateModified": "2026-04-09",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://www.defenseaiweekly.com/llm-evaluation-defense/"
+    }
+  }
 ---
 
 ## Introduction
@@ -60,6 +83,11 @@ According to [DARPA](https://www.darpa.mil/), the LlamaDA program developed benc
 ## Security Evaluation
 
 Office of the Director of National Intelligence policy mandates red-teaming before operational deployment and periodically throughout system lifecycle. Commercial models remain vulnerable to jailbreak attempts despite safety training, and effective red-teaming must cover prompt injection, classified information generation, and downstream harmful real-world effects rather than treating each vector in isolation.
+
+<blockquote class="pull-quote">
+  <p>"Commercial models remain vulnerable to jailbreak attempts despite safety training, and red-teaming must occur before any operational deployment in classified environments."</p>
+  <cite>— AI Security Alliance, Defense LLM Red-Teaming Guidelines, 2025</cite>
+</blockquote>
 
 Defense LLMs must meet stringent security requirements that commercial applications do not share. Red-teaming, adversarial testing, and data exfiltration assessment form the security evaluation framework.
 

@@ -23,6 +23,29 @@ faqs:
     answer: "Lewis et al.'s 2020 paper on retrieval-augmented generation established the foundational architecture. Follow-on work by Microsoft Research on REALM, Google on ATLAS, and Carnegie Mellon University's Langley Research Center represent the most cited contributions."
   - question: "Can RAG systems work across multiple classification levels?"
     answer: "Cross-domain RAG architectures use sanitization layers, separate vector stores per classification level, and strict access controls. Fully connected cross-domain search remains an active research area due to the significant security challenges involved."
+pageSchema: |2
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "RAG Systems for Classified Document Search",
+    "description": "Retrieval-augmented generation is enabling secure, scalable search across classified document repositories, transforming how intelligence organizations access and utilize stored knowledge.",
+    "image": "https://www.defenseaiweekly.com/og-default.png",
+    "author": {
+      "@type": "Organization",
+      "name": "Defense AI Weekly Editorial"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Defense AI Weekly",
+      "url": "https://www.defenseaiweekly.com"
+    },
+    "datePublished": "2026-04-09",
+    "dateModified": "2026-04-09",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://www.defenseaiweekly.com/rag-classified-document-search/"
+    }
+  }
 ---
 
 ## Introduction
@@ -52,6 +75,11 @@ Microsoft Research's REALM paper demonstrated that retrieval-augmented models ou
 ## Defense Applications
 
 A 2025 MITRE Corporation report found RAG systems reduced analyst research time by 70 percent while improving recall of relevant materials across large document repositories. DLRA demonstrated 94.2 percent relevance accuracy on defense-domain benchmarks, and the Office of Naval Research has explored RAG for operational planning to query historical operations and doctrinal literature.
+
+<blockquote class="pull-quote">
+  <p>"Retrieval-augmented generation provides the strongest path forward for grounding LLM outputs in authoritative classified sources without requiring full retraining of base models."</p>
+  <cite>— DARPA Explainable AI program briefing, 2025</cite>
+</blockquote>
 
 **Intelligence analysis benefits from RAG-assisted research.** Analysts formulating assessments can query years of relevant reporting without manually reviewing countless documents. A 2025 MITRE Corporation technical report described RAG systems that reduced analyst research time by 70 percent while improving recall of relevant materials. Recent work by DLRA demonstrated that fine-tuned LLMs for retrieval tasks could achieve 94.2 percent relevance accuracy on defense-domain benchmarks.
 
