@@ -35,6 +35,11 @@ module.exports = function(eleventyConfig) {
   // Add year shortcode for copyright
   eleventyConfig.addShortcode("year", () => `${new Date().getFullYear()}`);
 
+  // Markdown filter so .njk files can render markdown content
+  const markdownIt = require("markdown-it");
+  const md = markdownIt({ html: true, linkify: true, typographer: true });
+  eleventyConfig.addFilter("markdown", (content) => md.render(content || ""));
+
   return {
     dir: {
       input: "src",

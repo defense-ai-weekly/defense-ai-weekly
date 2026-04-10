@@ -548,6 +548,10 @@ p { margin: 0 0 var(--space-md); }
     gap: var(--space-md);
   }
   
+  .def-menu__item {
+    position: static;
+  }
+  
   .def-dropdown {
     position: static;
     transform: none;
@@ -555,9 +559,16 @@ p { margin: 0 0 var(--space-md); }
     border: none;
     background: transparent;
     padding-left: var(--space-md);
+    opacity: 1;
+    visibility: visible;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height var(--duration-base) var(--ease-out);
   }
   
+  .def-menu__item:focus-within .def-dropdown,
   .def-menu__item:hover .def-dropdown {
+    max-height: 400px;
     visibility: visible;
     opacity: 1;
   }
