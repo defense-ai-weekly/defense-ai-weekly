@@ -118,7 +118,9 @@
   </header>
 
   <main class="def-main">
-    {{ content | markdown | safe }}
+    <div class="def-article">
+      {{ content | markdown | safe }}
+    </div>
   </main>
 
   <footer class="def-footer">
