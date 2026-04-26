@@ -1,35 +1,32 @@
 ---
 layout: base.njk
 title: "Evaluating LLMs for Defense Applications"
-description: "LLM evaluation for defense demands red-teaming, robustness testing, and compliance frameworks beyond commercial benchmarks for operational intelligence deployment."
+description: "Defense LLM evaluation demands structured red-teaming, adversarial robustness testing, and compliance frameworks well beyond standard commercial benchmarks."
 permalink: /llm-evaluation-defense/
 breadcrumbs:
   - name: Home
     url: https://defenseaiweekly.com/
-  - name: Analysis
-    url: https://defenseaiweekly.com/analysis/
   - name: "Evaluating LLMs for Defense Applications"
     url: https://defenseaiweekly.com/llm-evaluation-defense/
 faqs:
   - question: "What makes LLM evaluation different in defense contexts?"
-    answer: "Defense LLM evaluation must assess not just accuracy but also security properties including robustness against adversarial prompts, ability to handle classified information appropriately, compliance with chain-of-custody requirements, and performance under distribution shift when inputs differ from training data."
+    answer: "Defense LLM evaluation must assess security properties including adversarial robustness, classification handling compliance, and chain-of-custody integrity alongside accuracy — requirements absent from commercial benchmarks. The NIST AI RMF provides the structural framework, but defense-specific threat models require additional evaluation dimensions addressing adversary-driven failure modes."
+  - question: "How does red-teaming apply to defense LLM evaluation?"
+    answer: "Red-teaming uses trained evaluators and automated tools to discover model vulnerabilities through systematic probing. Anthropic's foundational study released 38,961 red team attacks, while the PAIR algorithm demonstrated that automated jailbreaks can be generated in fewer than 20 queries — meaning defense red-teaming must combine human expertise with automated adversarial tools operating at scale."
   - question: "What are the key evaluation dimensions for defense LLMs?"
-    answer: "Key dimensions include task accuracy on domain-relevant benchmarks, robustness to adversarial and out-of-distribution inputs, inference latency and throughput for operational timelines, security properties including data exfiltration risks, and alignment with defense-specific policies and procedures."
-  - question: "How does DARPA evaluate LLM capabilities for defense?"
-    answer: "DARPA's LlamaDA program established evaluation frameworks for defense LLM applications. According to DARPA, the program developed benchmarks covering 12 capability dimensions including reasoning, domain knowledge, robustness, and security properties."
-  - question: "What role do red-teaming exercises play in evaluation?"
-    answer: "Red-teaming involves trained evaluators attempting to cause LLM failures including policy violations, security breaches, and generation of harmful content. According to Anthropic, structured red-teaming identifies vulnerabilities missed by automated evaluation alone."
-  - question: "How should defense organizations handle LLM benchmark limitations?"
-    answer: "No single benchmark captures all relevant capabilities. Defense organizations should use multiple complementary benchmarks, supplement automated evaluation with human expert assessment, and conduct operational testing in realistic environments before deployment."
+    answer: "Key dimensions include task accuracy on domain-relevant benchmarks, adversarial robustness against prompt injection and jailbreaking (which succeeded 26 to 41 percent of the time in Meta's CyberSecEval 2), inference latency for operational timelines, classification handling compliance, and alignment with DoD responsible AI principles and applicable international humanitarian law."
+  - question: "Why are commercial benchmarks insufficient for defense applications?"
+    answer: "Commercial benchmarks suffer from coverage gaps (models historically evaluated on only 17.9 percent of relevant scenarios per HELM), ranking instability under minor perturbations (shifts of up to 8 positions), and absence of security-relevant evaluation dimensions. Defense applications require adversarial testing, compliance verification, and operational validation that no commercial leaderboard addresses."
+  - question: "What role does the NIST AI RMF play in defense LLM evaluation?"
+    answer: "The NIST AI Risk Management Framework (AI 100-1, January 2023) provides four core functions — Govern, Map, Measure, and Manage — that structure risk management across the AI lifecycle. Defense organizations use this voluntary framework as a baseline, extending it with domain-specific requirements for adversarial testing, classification handling, and operational validation under the DoD's responsible AI governance structures."
   - question: "What evaluation frameworks exist specifically for defense AI?"
-    answer: "The DoD's Chief Digital and Artificial Intelligence Office published the Responsible AI Guidelines and Implementation Pathway. NIST Special Publication 1270 addresses AI measurement and evaluation. The Space Force's AI Evaluation Framework represents the first service-specific approach."
+    answer: "The DoD's Responsible AI Strategy and Implementation Pathway (June 2022) establishes governance requirements. DARPA's GARD program developed scenario-based adversarial evaluation methodologies. The NIST AI RMF provides the overarching risk management structure. The GAO's AI Accountability Framework (June 2021) defines governance, data, performance, and monitoring principles for federal AI deployment. No single framework covers all defense evaluation requirements, making multi-framework approaches necessary."
 pageSchema: |2
   {
     "@context": "https://schema.org",
-    "@type": "TechArticle",
+    "@type": "Article",
     "headline": "Evaluating LLMs for Defense Applications",
-    "description": "LLM evaluation for defense demands red-teaming, robustness testing, and compliance frameworks beyond commercial benchmarks for operational intelligence deployment.",
-    "image": "https://www.defenseaiweekly.com/og-default.png",
+    "description": "Defense LLM evaluation demands structured red-teaming, adversarial robustness testing, and compliance frameworks well beyond standard commercial benchmarks.",
     "author": {
       "@type": "Organization",
       "name": "Defense AI Weekly Editorial"
@@ -37,146 +34,152 @@ pageSchema: |2
     "publisher": {
       "@type": "Organization",
       "name": "Defense AI Weekly",
-      "url": "https://www.defenseaiweekly.com"
+      "url": "https://defenseaiweekly.com"
     },
-    "datePublished": "2026-04-09",
-    "dateModified": "2026-04-09",
+    "datePublished": "2026-04-26",
+    "dateModified": "2026-04-26",
     "mainEntityOfPage": {
       "@type": "WebPage",
-      "@id": "https://www.defenseaiweekly.com/llm-evaluation-defense/"
+      "@id": "https://defenseaiweekly.com/llm-evaluation-defense/"
     }
   }
 ---
 
 ## Introduction
 
-Defense LLM evaluation differs fundamentally from commercial assessment because stringent reliability, security, and compliance requirements demand frameworks built for consequential decisions. The Department of Defense Chief Digital and AI Office mandates evaluation frameworks address "the full spectrum of risks that deployment could introduce," making LLM assessment methods wholly unsuitable for intelligence applications.
-
-Defense organizations have developed rigorous evaluation frameworks to assess LLM suitability before operational deployment. According to the [DoD CDAO](https://www.ai.mil/), evaluation frameworks must address "the full spectrum of risks that deployment could introduce."
+Defense LLM evaluation differs fundamentally from commercial assessment because stringent reliability, security, and compliance requirements demand frameworks purpose-built for consequential decisions. The [NIST AI Risk Management Framework](https://doi.org/10.6028/NIST.AI.100-1) (AI RMF 1.0), published in January 2023, established four core functions — Govern, Map, Measure, and Manage — that structure how organizations should approach AI risk across the entire system lifecycle, and defense organizations have adopted these functions as a baseline for LLM evaluation processes that must address adversarial threats, classification handling, and operational reliability simultaneously.
 
 ## The Evaluation Challenge
 
-Army Research Laboratory research shows LLM performance degrades 30 to 50 percent when inputs differ from training conditions — a critical gap for defense applications where deployment contexts shift constantly. Ground truth is unavailable for many defense-relevant tasks, forcing reliance on expert consensus, and commercial benchmarks inadequately assess security, robustness, and compliance properties.
+Standard LLM benchmarks measure performance on curated test sets that bear little resemblance to the messy, adversarial, and high-consequence environments where defense systems operate. Stanford's HELM study found that prior to its intervention, leading language models had been evaluated on only [17.9 percent of core evaluation scenarios](https://arxiv.org/abs/2211.09110) on average, with some prominent models sharing no common evaluation ground whatsoever. These coverage gaps become critical in defense contexts where untested capabilities can produce mission-threatening failures.
 
-**Ground truth is often unavailable for defense-relevant tasks.** Unlike benchmark tasks with known correct answers, many defense applications involve judgment calls where experts disagree. A model that generates reasonable-seeming intelligence assessments may nonetheless contain subtle errors that trained analysts would catch but automated evaluation cannot detect.
+**Ground truth is often unavailable for defense-relevant tasks.** Unlike benchmark tasks with known correct answers, many defense applications involve judgment calls where analysts disagree. A model that generates reasonable-seeming intelligence assessments may contain subtle errors that trained analysts would catch but automated evaluation cannot detect. The [GAIA benchmark](https://arxiv.org/abs/2311.12983) demonstrated this gap starkly: human respondents achieved 92 percent accuracy on real-world assistant tasks while GPT-4 equipped with plugins reached only 15 percent — a disparity that underscores how poorly automated metrics capture practical capability.
 
-According to the [Journal of Defense Research](https://academic.oup.com/jdr/), the lack of ground truth complicates both model comparison and acceptance criteria establishment. Defense organizations often use expert consensus as a proxy for ground truth, which introduces its own limitations.
+**Evaluation must assess properties beyond accuracy.** Security, robustness, and compliance properties often matter more than raw accuracy for defense applications. NIST's [Adversarial Machine Learning taxonomy](https://doi.org/10.6028/NIST.AI.100-2e2023) (AI 100-2e2023, January 2024) identifies four major attack categories — evasion, data poisoning, privacy breaches, and trojan/backdoor attacks — each requiring distinct evaluation methodologies that commercial benchmarks do not address.
 
-**Distribution shift between evaluation and operational contexts degrades performance.** Models are evaluated on curated test sets that may not reflect the messy reality of operational inputs. According to the [Army Research Laboratory](https://www.arl.army.mil/), LLM performance on defense tasks can degrade by 30 to 50 percent when inputs differ meaningfully from evaluation conditions.
-
-**Evaluation must assess properties beyond accuracy.** Security, robustness, and compliance properties often matter more than raw accuracy for defense applications. These properties require specialized evaluation methodologies that commercial benchmarks do not address.
+**Benchmark instability undermines model selection.** Research from King Saud University and SDAIA found that [minor modifications to benchmark structure cause ranking changes of up to 8 positions](https://arxiv.org/abs/2402.01781), calling into question whether leaderboard-driven model selection provides the reliability defense procurement demands.
 
 ## Capability Evaluation Frameworks
 
-DARPA's LlamaDA program established benchmarks covering 12 capability dimensions spanning reasoning, knowledge, instruction following, and task completion. Reasoning benchmarks correlate imperfectly with real-world defense task performance, and domain-specific knowledge evaluation identifies significant gaps even in high-performing general models — highlighting why commercial leaderboards cannot substitute for operational evaluation in classified environments.
+Assessing LLM capabilities for defense requires structured frameworks spanning task accuracy, reasoning, and domain knowledge — measured not against generic benchmarks but against operationally relevant scenarios that reflect the intelligence cycle, threat assessment, and doctrinal analysis tasks these models will actually perform.
 
-Assessing LLM capabilities requires structured frameworks covering relevant task dimensions. Task-specific benchmarks, reasoning evaluations, and domain knowledge testing form the core of capability assessment.
+**Task-specific benchmarks measure performance on defined operations.** For intelligence summarization, benchmark datasets contain documents with expert-generated summaries. For threat assessment, benchmarks contain scenarios with known threat levels. Stanford's HELM project expanded evaluation from fragmented, inconsistent testing to a standardized framework covering [42 scenarios across 7 metrics](https://arxiv.org/abs/2211.09110) — accuracy, calibration, robustness, fairness, bias, toxicity, and efficiency — providing the kind of multi-dimensional assessment defense applications require.
 
-**Task-specific benchmarks measure performance on defined operations.** For intelligence summarization, benchmark datasets contain documents with expert-generated summaries. For threat assessment, benchmarks contain scenarios with known threat levels. Models receive scores based on agreement with expert assessments.
+**Reasoning evaluation uses structured problem sets.** Defense applications often require multi-step reasoning across incomplete information. The GPQA benchmark demonstrated the difficulty of creating evaluation sets that resist simple lookup: on 448 graduate-level questions in biology, physics, and chemistry, [skilled non-experts with 30 minutes of unrestricted web access achieved only 34 percent accuracy](https://arxiv.org/abs/2311.12022) while GPT-4 reached 39 percent. These difficulty levels matter for defense evaluation because they establish realistic performance ceilings even when evaluators have access to extensive reference material.
 
-According to [DARPA](https://www.darpa.mil/), the LlamaDA program developed benchmarks covering intelligence analysis tasks including document summarization, entity extraction, relationship mapping, and preliminary assessment generation. These benchmarks establish baseline capabilities and enable model comparison.
-
-**Reasoning evaluation uses structured problem sets.** Defense applications often require multi-step reasoning. Benchmarks such as GSM8K for math reasoning and BIG-Bench Hard for complex tasks assess reasoning capabilities. According to [TACL](https://transacl.org/), reasoning benchmarks correlate imperfectly with real-world defense task performance.
-
-**Domain knowledge evaluation tests relevant factual recall.** Defense LLMs must understand military doctrine, weapons systems, and geopolitical context. Evaluation datasets contain questions testing this knowledge. According to the [RAND Corporation](https://www.rand.org/), domain-specific knowledge evaluation identifies significant gaps even in models excelling on general benchmarks.
+**Domain knowledge evaluation reveals gaps invisible in general benchmarks.** Meta's CyberSecEval 2 evaluation suite tested LLMs across cybersecurity tasks and found [prompt injection attacks succeeded between 26 and 41 percent of the time](https://arxiv.org/abs/2404.13161) across GPT-4, Mistral, and Llama 3 — demonstrating that models excelling on general benchmarks still harbor significant domain-specific vulnerabilities directly relevant to defense deployment.
 
 ## Security Evaluation
 
-Office of the Director of National Intelligence policy mandates red-teaming before operational deployment and periodically throughout system lifecycle. Commercial models remain vulnerable to jailbreak attempts despite safety training, and effective red-teaming must cover prompt injection, classified information generation, and downstream harmful real-world effects rather than treating each vector in isolation.
+Security evaluation for defense LLMs encompasses red-teaming, adversarial robustness testing, and data exfiltration assessment — a combination that goes well beyond the safety testing applied to consumer-facing models and must account for adversaries who will actively probe model weaknesses using automated tools at scale.
 
 <blockquote class="pull-quote">
-  <p>"Commercial models remain vulnerable to jailbreak attempts despite safety training, and red-teaming must occur before any operational deployment in classified environments."</p>
-  <cite>— AI Security Alliance, Defense LLM Red-Teaming Guidelines, 2025</cite>
+  <p>"Current frontier models can sometimes produce sophisticated, accurate, useful, and detailed knowledge at an expert level."</p>
+  <cite>— Anthropic, <a href="https://www.anthropic.com/news/frontier-threats-red-teaming-for-ai-safety">Frontier Threats Red Teaming for AI Safety</a>, July 2023</cite>
 </blockquote>
 
-Defense LLMs must meet stringent security requirements that commercial applications do not share. Red-teaming, adversarial testing, and data exfiltration assessment form the security evaluation framework.
+**Red-teaming exposes model vulnerabilities that automated testing misses.** Anthropic's foundational red-teaming study released a dataset of [38,961 red team attacks](https://arxiv.org/abs/2209.07858) across models ranging from 2.7 billion to 52 billion parameters, finding that RLHF-aligned models become increasingly difficult to red-team as they scale — but never become immune. Their subsequent frontier red-teaming effort involved domain experts spending [more than 150 hours](https://www.anthropic.com/news/frontier-threats-red-teaming-for-ai-safety) probing biological risk capabilities, discovering that models sometimes produce expert-level dangerous knowledge.
 
-**Red-teaming exposes model vulnerabilities.** Trained evaluators attempt to cause policy violations, generate harmful outputs, or extract sensitive information. According to [Anthropic](https://www.anthropic.com/), structured red-teaming identifies failure modes that automated evaluation misses.
+**Automated jailbreaking demonstrates persistent vulnerability at scale.** Researchers at the University of Pennsylvania developed PAIR (Prompt Automatic Iterative Refinement), an algorithm that [generates jailbreaks in fewer than 20 queries](https://arxiv.org/abs/2310.08419) using one LLM to automatically attack another — achieving competitive success rates against GPT-3.5, GPT-4, Vicuna, and Gemini without human intervention. For defense contexts, this means adversaries can automate the discovery of model weaknesses faster than manual red teams can catalog them.
 
-The intelligence community conducts red-teaming exercises before operational deployment. According to [ODNI policy](https://www.dni.gov/), red-teaming must cover at minimum: prompt injection attempts, attempts to generate classified information, attempts to violate handling procedures, and attempts to cause harmful real-world effects.
+**Universal adversarial attacks transfer across model families.** Carnegie Mellon researchers demonstrated that adversarial suffixes trained on open-source models [successfully compromised ChatGPT, Bard, and Claude](https://arxiv.org/abs/2307.15043) — all closed-source production systems. This cross-model transferability means defense organizations cannot rely on model-specific security assessments; an attack developed against one system may compromise others deployed across different defense programs.
 
-**Adversarial robustness testing assesses model behavior under adversarial inputs.** Attackers may attempt to manipulate model outputs through carefully crafted inputs. According to the [IEEE Symposium on Security and Privacy](https://www.ieee.org/conferences/index.html), adversarial training and input preprocessing provide partial defenses.
-
-**Data exfiltration risk assessment evaluates whether models could inadvertently reveal sensitive information.** Models trained on sensitive data might generate outputs that contain or reveal that data. According to [NSA technical guidance](https://www.nsa.gov/), data exfiltration evaluation must assess both direct extraction attempts and indirect inference attacks.
-
-**Jailbreak resistance testing evaluates model behavior when users attempt to bypass safety measures.** According to the [AI Security Alliance](https://www.ai-security-alliance.org/), commercial models remain vulnerable to jailbreak attempts despite safety training. Defense deployments may require additional hardening.
+**Data exfiltration risk assessment evaluates whether models could inadvertently reveal sensitive information.** Models trained on or exposed to sensitive data might generate outputs that contain or reveal that data through direct extraction or indirect inference attacks. DARPA's [GARD program](https://www.darpa.mil/research/programs/guaranteeing-ai-robustness-against-deception) found that "ML defenses tend to be highly specific and are effective only against particular attacks" — a finding that drives the need for scenario-based security evaluation rather than reliance on any single defensive technique.
 
 ## Robustness Evaluation
 
-Out-of-distribution robustness varies dramatically across models, with performance dropping 30 to 50 percent when inputs shift meaningfully from evaluation conditions. Stress testing reveals failure modes invisible under normal operating conditions — critical for defense deployments where adversaries actively probe edge cases and deliberately craft inputs that mirror the distributional shifts weakening commercial systems.
+Models must perform reliably when operational inputs diverge from training conditions — a guarantee that no current benchmark suite can provide, and that defense deployments must establish through stress testing, adversarial input evaluation, and systematic out-of-distribution probing that goes beyond academic robustness benchmarks.
 
-Models must perform reliably even when operational inputs differ from training conditions. Out-of-distribution testing, adversarial input testing, and stress testing form the robustness evaluation framework.
+**Adversarial prompt robustness reveals fundamental vulnerability.** The PromptRobust benchmark evaluated LLMs against [4,788 adversarial prompts across 8 tasks spanning 13 datasets](https://arxiv.org/abs/2306.04528), testing character-level, word-level, sentence-level, and semantic-level perturbations that mimic realistic user errors like typos and synonyms. The study found that current LLMs remain fundamentally vulnerable to these variations — a critical concern for defense systems processing inputs from diverse operators under time pressure.
 
-**Out-of-distribution testing evaluates behavior on inputs outside training distribution.** Real-world inputs inevitably differ from training data. According to [MITRE Corporation](https://www.mitre.org/), out-of-distribution robustness varies dramatically across models and remains a significant concern for operational deployment.
+**Stress testing reveals failure modes invisible under normal conditions.** High-volume processing, extended operation, and resource constraints degrade model performance in ways laboratory evaluation cannot surface. The MLCommons AI Safety Benchmark v0.5 created [43,090 test items](https://arxiv.org/abs/2404.12241) across 13 hazard categories to systematically probe safety-relevant failure modes — yet its authors explicitly cautioned that even this scale of testing should not be used to certify AI system safety, underscoring the gap between available evaluation tools and defense deployment requirements.
 
-**Adversarial input testing evaluates behavior under intentionally crafted worst-case inputs.** Attackers may craft inputs designed to cause failures. According to the [Journal of Machine Learning Research](https://www.jmlr.org/), adversarial training provides limited robustness to novel attacks not seen during training.
-
-**Distribution shift evaluation assesses performance across environmental changes.** Models may be evaluated in one operational context but deployed in another. According to the [Army Research Laboratory](https://www.arl.army.mil/), performance can degrade significantly when operational conditions differ from evaluation conditions.
-
-**Stress testing evaluates behavior at operational boundaries.** High-volume processing, extended operation, and resource constraints can degrade model performance. According to [DARPA's explainable AI program](https://www.darpa.mil/), stress testing reveals failure modes invisible under normal conditions.
+**Benchmark limitations compound under operational stress.** Research on multi-task benchmark stability revealed an inherent trade-off: [the more diverse a benchmark, the more sensitive it becomes to trivial changes](https://arxiv.org/abs/2405.01719), creating a fundamental tension between evaluation breadth and result stability. For defense organizations selecting models for deployment, this means that composite benchmark scores may not reliably predict real-world performance across the varied conditions operational environments present.
 
 ## Compliance and Policy Evaluation
 
-Per ODNI guidance, AI-generated intelligence products must be clearly marked and traceable throughout the analytical chain. NSA policy requires technical controls preventing inadvertent classification spillage when models trained on mixed-level data are accessed from controlled environments, and privacy impact assessments are mandatory before operational AI deployment under intelligence community policy.
+Defense LLMs must operate within established policy and legal frameworks that impose requirements with no commercial equivalent. Chain-of-custody integrity, classification handling, and privacy impact assessment form the compliance evaluation framework — each requiring evidence that automated systems maintain the same procedural safeguards human analysts are trained to uphold.
 
-Defense LLMs must operate within established policy and legal frameworks. Chain-of-custody, classification handling, and privacy impact assessment form the compliance evaluation framework.
+**Chain-of-custody evaluation ensures model outputs maintain evidentiary integrity.** Intelligence products may be used in legal proceedings or congressional oversight. The [DoD's Responsible AI Strategy and Implementation Pathway](https://media.defense.gov/2022/Jun/22/2003022604/-1/-1/0/Department-of-Defense-Responsible-Artificial-Intelligence-Strategy-and-Implementation-Pathway.PDF) (June 2022) established governance structures requiring traceability and accountability for AI-generated outputs across the department — mandates that evaluation frameworks must verify through documented testing rather than assumed compliance.
 
-**Chain-of-custody evaluation ensures model outputs maintain evidentiary integrity.** Intelligence products may be used in legal proceedings or congressional oversight. According to [ODNI policy](https://www.dni.gov/) guidance, AI-generated content must be clearly marked and traceable.
+**Classification handling evaluation ensures models appropriately handle classified inputs.** Models operating on classified networks must maintain appropriate boundaries between classification levels. The NIST AI RMF's Govern function requires organizations to establish [policies and processes for AI risk management](https://doi.org/10.6028/NIST.AI.100-1) including information integrity controls — a mandate that extends to preventing inadvertent spillage when models trained on mixed-level data are accessed from controlled environments.
 
-**Classification handling evaluation ensures models appropriately handle classified inputs.** Models operating on classified networks must maintain appropriate boundaries. According to [NSA information security policy](https://www.nsa.gov/), AI systems must implement controls preventing inadvertent spillage.
+**International humanitarian law compliance matters for autonomous systems.** [DoD Directive 3000.09](https://www.esd.whs.mil/portals/54/documents/dd/issuances/dodd/300009p.pdf) on Autonomy in Weapon Systems, updated in January 2023, requires that autonomous and semi-autonomous weapon systems be designed to allow commanders and operators to exercise appropriate levels of human judgment over the use of force — evaluation frameworks must verify that LLM-assisted decision support preserves this chain of human accountability.
 
-**International humanitarian law compliance assessment evaluates whether model outputs could contribute to violations.** Autonomous weapons applications require particular scrutiny. According to [DoD Directive 3000.09](https://www.defense.gov/), human responsibility for lethal autonomous systems must be clearly established.
-
-**Privacy impact assessment evaluates effects on individual privacy.** Even intelligence-focused models may process information about individuals. According to the [Privacy Act of 1974](https://www.justice.gov/opcl/privacy-act-1974), agencies must assess privacy impacts before deploying AI systems.
+**Privacy impact assessment evaluates effects on individual privacy.** Even intelligence-focused models may process information about individuals. The [GAO's AI Accountability Framework](https://www.gao.gov/products/gao-21-519sp) (June 2021) identified four complementary principles for trustworthy AI — governance, data, performance, and monitoring — each requiring documented evaluation before federal agencies deploy AI systems that process personal data.
 
 ## Operational Testing
 
-The Chief Digital and AI Office requires pilot programs demonstrating measurable user productivity gains before granting full deployment authorization. User acceptance testing identifies workflow integration challenges that benchmark evaluation cannot surface, and continuous performance monitoring is required to detect and address drift as data distributions, adversary tactics, and operational requirements evolve over a system's lifetime.
+Laboratory evaluation must be supplemented with operational testing in realistic environments. Pilot programs, user acceptance testing, and continuous performance monitoring form the operational testing framework — because the gap between benchmark performance and real-world utility has proven large enough to invalidate deployment decisions based on automated metrics alone.
 
-Laboratory evaluation must be supplemented with operational testing in realistic environments. Pilot programs, user acceptance testing, and performance monitoring form the operational testing framework.
+**Pilot programs test models in contained operational settings.** Before full deployment, models undergo pilot testing with limited scope, defined success criteria, and structured feedback collection. The DoD's establishment of [Task Force Lima](https://www.ai.mil/About/) in August 2023 specifically to assess generative AI applications across the department reflected recognition that evaluation must include controlled operational exposure — not just laboratory benchmarks — before scaling AI capabilities to operational units.
 
-**Pilot programs test models in contained operational settings.** Before full deployment, models undergo pilot testing with limited scope. According to [CDAO implementation guidance](https://www.ai.mil/), pilot programs must include performance monitoring, user feedback collection, and defined criteria for scaling or termination.
+**User acceptance testing surfaces integration failures invisible to benchmarks.** Models that analysts find cumbersome, untrustworthy, or disruptive to established workflows provide no operational value regardless of benchmark scores. The GAIA benchmark's finding that [GPT-4 with plugins achieved only 15 percent](https://arxiv.org/abs/2311.12983) on tasks where humans score 92 percent illustrates how dramatically real-world usability can diverge from capability claims — a gap that only surfaces through testing with actual operators.
 
-**User acceptance testing assesses analyst satisfaction and workflow integration.** Models that analysts find cumbersome or untrustworthy will not provide value. According to the [International Journal of Human-Computer Studies](https://www.ijhcs.org/), user acceptance testing identifies workflow integration challenges invisible to system developers.
-
-**Adversarial testing under realistic attack conditions validates security properties.** Operational security testing goes beyond laboratory red-teaming to simulate actual adversary capabilities. According to [US Cyber Command](https://www.cybercom.mil/), operational testing reveals security properties not visible in isolated evaluation.
-
-**Performance monitoring in production identifies degradation over time.** Model performance can degrade as operational conditions evolve. According to [DoD AI maintenance guidance](https://www.ai.mil/), continuous monitoring is required to detect and address performance drift.
+**Performance monitoring in production detects degradation over time.** Model performance can degrade as operational conditions evolve, adversary tactics shift, and data distributions change. The NIST AI RMF's Manage function specifically addresses [ongoing monitoring and response](https://doi.org/10.6028/NIST.AI.100-1) for deployed AI systems, requiring organizations to maintain processes for identifying, tracking, and responding to AI risks throughout the system lifecycle rather than treating initial evaluation as sufficient.
 
 ## Benchmark Limitations
 
-RAND Corporation research documents a 2 to 3 year lag between operational need emergence and benchmark availability — a structural constraint on how quickly evaluation can catch up with deployment. Benchmark obsolescence limits utility as requirements evolve, and models optimized specifically for benchmarks frequently fail to perform well on the actual tasks they were meant to represent.
+Current benchmarks suffer from structural limitations that defense organizations must understand before building procurement and deployment decisions around benchmark scores that may not reflect operational reality.
 
-**Goodhart's Law applies: when a measure becomes a target, it ceases to be a good measure.** Models optimized for benchmarks may not perform well on actual tasks. According to the [Journal of AI Research](https://www.jair.org/), benchmark gaming explains much apparent progress in LLM capabilities.
+**Goodhart's Law applies: when a measure becomes a target, it ceases to be a good measure.** Models optimized for benchmarks may not perform well on actual tasks. Stanford researchers demonstrated that [alleged emergent abilities in LLMs evaporate](https://arxiv.org/abs/2304.15004) when evaluated with different metrics or better statistics — suggesting that apparent capability breakthroughs may reflect measurement artifacts rather than genuine operational improvement.
 
-**Benchmarks become obsolete as operational requirements evolve.** Defense applications emerge faster than benchmark development can track. According to the [RAND Corporation](https://www.rand.org/), there is typically a 2-3 year lag between operational need emergence and benchmark availability.
+**Benchmark instability undermines confidence in model rankings.** The sensitivity analysis by [Alzahrani et al.](https://arxiv.org/abs/2402.01781) showed that perturbations as minor as reordering multiple-choice options cause ranking shifts of up to 8 positions across established leaderboards. The researchers concluded that practitioners should not accept leaderboard positions uncritically and recommended hybrid scoring methods to improve robustness.
 
-**Proprietary benchmarks lack transparency.** Commercial model providers often evaluate on undisclosed benchmarks. According to [NIST AI guidance](https://csrc.nist.gov/projects/ai), lack of transparency complicates independent verification of claimed capabilities.
+**Black-box evaluation provides incomplete assurance.** Research presented at FAccT 2024 argued that [black-box access is insufficient for rigorous AI audits](https://arxiv.org/abs/2401.14446), demonstrating that white-box access to model weights and activations enables substantially deeper evaluation — a finding that challenges defense procurement models built around evaluating closed-source commercial systems through API access alone.
 
-**Human evaluation remains the gold standard but scales poorly.** Expert human assessment provides the most reliable capability indication but costs too much for large-scale evaluation. According to the [Center for Security and Emerging Technology](https://cset.georgetown.edu/), hybrid approaches combining automated and human evaluation offer the most practical path.
+**Human evaluation remains the gold standard but scales poorly.** Expert assessment provides the most reliable capability indication but cannot scale to match the pace of model releases. The hybrid approach combining automated benchmarks with structured human evaluation — exemplified by [HELM's 42-scenario, 7-metric framework](https://arxiv.org/abs/2211.09110) — offers the most practical path for defense organizations balancing thoroughness against evaluation timelines.
 
 ## Recommended Evaluation Framework
 
-Defense organizations deploying LLMs should implement structured evaluation covering multiple dimensions. A phased approach — capability assessment, security testing, compliance evaluation, and operational validation — enables early identification of issues while managing deployment risks per the DoD Responsible AI Implementation Pathway.
+Defense organizations deploying LLMs should implement structured evaluation covering multiple dimensions. A phased approach enables early identification of issues while managing deployment risks across the system lifecycle.
 
-**Phase 1: Capability Assessment** covers task-specific benchmark evaluation, reasoning and knowledge testing, and domain-specific capability assessment. Phase 2 addresses security through red-teaming exercises, adversarial robustness testing, and data exfiltration risk assessment. Phase 3 focuses on compliance with policy evaluation, chain-of-custody testing, and privacy impact assessment. Phase 4 provides operational validation through pilot program execution, user acceptance testing, and performance monitoring setup.
+**Phase 1: Capability Assessment** covers task-specific benchmark evaluation against operationally relevant scenarios, reasoning and domain knowledge testing using curated defense-relevant question sets, and baseline comparison across candidate models using standardized multi-metric frameworks like HELM.
 
-According to the [DoD Responsible AI Implementation Pathway](https://www.ai.mil/), this phased approach enables early identification of issues while managing deployment risks.
+**Phase 2: Security Testing** addresses red-teaming exercises using both human experts and automated tools like PAIR, adversarial robustness testing across character, word, sentence, and semantic perturbation levels, data exfiltration risk assessment through direct extraction and indirect inference probing, and jailbreak resistance evaluation including cross-model transfer attacks.
+
+**Phase 3: Compliance Evaluation** encompasses chain-of-custody verification for AI-generated intelligence products, classification handling testing across network boundaries, IHL compliance assessment for decision-support applications, and privacy impact evaluation per the GAO's AI Accountability Framework.
+
+**Phase 4: Operational Validation** includes pilot program execution with defined success metrics, user acceptance testing with operational analysts, performance monitoring infrastructure deployment, and continuous evaluation processes aligned with the NIST AI RMF Manage function.
+
+This phased approach — aligned with both the [NIST AI Risk Management Framework](https://doi.org/10.6028/NIST.AI.100-1) and DoD responsible AI governance structures — enables defense organizations to identify disqualifying issues early while building the operational evidence base needed for full deployment authorization.
 
 ## Conclusion
 
-Defense LLM evaluation has evolved into a distinct discipline requiring frameworks that commercial benchmarks cannot provide. As the Department of Defense moves toward operational deployment, the gap between available evaluation tools and mission-critical requirements remains substantial — demanding continued investment in robustness testing across the intelligence community.
+Defense LLM evaluation has evolved into a distinct discipline requiring frameworks that commercial benchmarks cannot provide. The gap between automated benchmark scores and operational readiness remains substantial — Stanford's HELM project found that models were historically evaluated on fewer than 18 percent of relevant scenarios, while adversarial research consistently demonstrates that aligned models remain vulnerable to automated attacks requiring fewer than 20 queries. As defense organizations move from pilot programs to operational deployment, closing this evaluation gap demands continued investment in red-teaming infrastructure, domain-specific benchmarks, and the human expertise to interpret results that no automated metric can fully capture.
 
 ---
 
 ### Comparison: Evaluation Methods by Assessment Dimension
 
 | Dimension | Automated Methods | Human Expert Methods | Operational Testing |
-|-----------|-----------------|--------------------|--------------------|
-| Capability | Benchmark datasets, automated metrics | Task completion assessment | Pilot program performance |
-| Security | Red-team automation, adversarial testing | Manual red-teaming | Penetration testing |
-| Robustness | Distribution shift benchmarks | Edge case review | Stress testing |
-| Compliance | Policy conformance testing | Expert policy review | Audit trail analysis |
+|---|---|---|---|
+| Capability | Standardized benchmarks (HELM, GPQA), automated metrics across 7+ dimensions | Expert task completion assessment, domain knowledge verification | Pilot program performance, analyst productivity measurement |
+| Security | Automated red-teaming (PAIR), adversarial suffix generation, prompt injection suites | Manual red-teaming (150+ hours per domain), expert vulnerability discovery | Penetration testing by operational cyber teams |
+| Robustness | Distribution shift benchmarks, PromptRobust (4,788 adversarial prompts), stress testing | Edge case identification, failure mode categorization | Operational stress testing under realistic conditions |
+| Compliance | Policy conformance testing, chain-of-custody verification, classification boundary checks | Expert legal and policy review, IHL assessment | Audit trail analysis, post-deployment compliance monitoring |
+
+---
+
+### FAQ
+
+**What makes LLM evaluation different in defense contexts?**
+Defense LLM evaluation must assess security properties including adversarial robustness, classification handling compliance, and chain-of-custody integrity alongside accuracy — requirements absent from commercial benchmarks. The NIST AI RMF provides the structural framework, but defense-specific threat models require additional evaluation dimensions addressing adversary-driven failure modes.
+
+**How does red-teaming apply to defense LLM evaluation?**
+Red-teaming uses trained evaluators and automated tools to discover model vulnerabilities through systematic probing. Anthropic's foundational study released 38,961 red team attacks, while the PAIR algorithm demonstrated that automated jailbreaks can be generated in fewer than 20 queries — meaning defense red-teaming must combine human expertise with automated adversarial tools operating at scale.
+
+**What are the key evaluation dimensions for defense LLMs?**
+Key dimensions include task accuracy on domain-relevant benchmarks, adversarial robustness against prompt injection and jailbreaking (which succeeded 26 to 41 percent of the time in Meta's CyberSecEval 2), inference latency for operational timelines, classification handling compliance, and alignment with DoD responsible AI principles and applicable international humanitarian law.
+
+**Why are commercial benchmarks insufficient for defense applications?**
+Commercial benchmarks suffer from coverage gaps (models historically evaluated on only 17.9 percent of relevant scenarios per HELM), ranking instability under minor perturbations (shifts of up to 8 positions), and absence of security-relevant evaluation dimensions. Defense applications require adversarial testing, compliance verification, and operational validation that no commercial leaderboard addresses.
+
+**What role does the NIST AI RMF play in defense LLM evaluation?**
+The NIST AI Risk Management Framework (AI 100-1, January 2023) provides four core functions — Govern, Map, Measure, and Manage — that structure risk management across the AI lifecycle. Defense organizations use this voluntary framework as a baseline, extending it with domain-specific requirements for adversarial testing, classification handling, and operational validation under the DoD's responsible AI governance structures.
+
+**What evaluation frameworks exist specifically for defense AI?**
+The DoD's Responsible AI Strategy and Implementation Pathway (June 2022) establishes governance requirements. DARPA's GARD program developed scenario-based adversarial evaluation methodologies. The NIST AI RMF provides the overarching risk management structure. The GAO's AI Accountability Framework (June 2021) defines governance, data, performance, and monitoring principles for federal AI deployment. No single framework covers all defense evaluation requirements, making multi-framework approaches necessary.
 
 ---
 
