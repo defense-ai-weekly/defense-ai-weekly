@@ -10,6 +10,8 @@
 
   {% if canonical %}
   <link rel="canonical" href="{{ canonical }}">
+  {% else %}
+  <link rel="canonical" href="{{ site.url }}{{ page.url }}">
   {% endif %}
 
   <!-- Schema: Organization -->
