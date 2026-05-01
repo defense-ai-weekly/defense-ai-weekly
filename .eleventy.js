@@ -2,6 +2,11 @@ module.exports = function(eleventyConfig) {
   // Exclude page type reference templates from output
   eleventyConfig.ignores.add("src/_page_types/**");
 
+  // Articles collection — auto-generates from src/articles/*.njk (newest first)
+  eleventyConfig.addCollection("articles", (collectionApi) => {
+    return collectionApi.getFilteredByGlob("src/articles/*.njk").sort((a, b) => b.date - a.date);
+  });
+
   // Warn on unknown site type
   eleventyConfig.on("eleventy.before", () => {
     const site = require("./src/_data/site.json");
