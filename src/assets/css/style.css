@@ -623,6 +623,14 @@ p { margin: 0 0 var(--space-md); }
     box-shadow: none;
     opacity: 1;
     visibility: visible;
+    left: auto;
+    right: auto;
+    transform: none;
+    min-width: 0;
+    border: none;
+    border-radius: 0;
+    padding-top: 0;
+    padding-right: 0;
   }
 
   .def-dropdown__item,
