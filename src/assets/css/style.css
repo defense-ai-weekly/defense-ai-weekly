@@ -539,57 +539,164 @@ p { margin: 0 0 var(--space-md); }
    Responsive
    -------------------------------------------------------------------------- */
 
+/* === MOBILE NAV TOGGLE (CSS-only, no JS) === */
+.def-nav-toggle,
+.def-nav-toggle-label {
+  display: none;
+}
+
 @media (max-width: 768px) {
   .def-nav {
-    flex-direction: column;
-    height: auto;
+    position: relative;
     padding: var(--space-md);
-    gap: var(--space-md);
-  }
-  
-  .def-menu {
+    flex-direction: row;
     flex-wrap: wrap;
-    justify-content: center;
-    gap: var(--space-md);
+    height: auto;
+    justify-content: flex-start;
   }
-  
-  .def-menu__item {
-    position: static;
+
+  .def-nav-toggle-label {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 28px;
+    height: 22px;
+    cursor: pointer;
+    position: absolute;
+    top: var(--space-md);
+    right: var(--space-md);
+    z-index: 10;
   }
-  
-  .def-dropdown {
+
+  .def-nav-toggle-label span {
     display: block;
+    height: 3px;
+    width: 100%;
+    background: currentColor;
+    border-radius: 2px;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+  }
+
+  .def-menu {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    gap: 0;
+    margin-top: var(--space-md);
+  }
+
+  .def-nav-toggle:checked ~ .def-menu {
+    display: flex;
+  }
+
+  /* Animate hamburger to X when open */
+  .def-nav-toggle:checked ~ .def-nav-toggle-label span:nth-child(1) {
+    transform: translateY(9px) rotate(45deg);
+  }
+  .def-nav-toggle:checked ~ .def-nav-toggle-label span:nth-child(2) {
+    opacity: 0;
+  }
+  .def-nav-toggle:checked ~ .def-nav-toggle-label span:nth-child(3) {
+    transform: translateY(-9px) rotate(-45deg);
+  }
+
+  .def-menu__item {
+    width: 100%;
+    border-top: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .def-menu__link {
+    display: block;
+    padding: var(--space-md);
+    font-weight: 600;
+  }
+
+  /* Show ALL dropdown items inline on mobile — no nested tap-to-expand */
+  .def-dropdown {
     position: static;
-    transform: none;
-    box-shadow: none;
-    border: none;
-    background: transparent;
+    display: block;
+    max-height: none;
+    overflow: visible;
     padding-left: var(--space-md);
+    padding-bottom: var(--space-sm);
+    background: transparent;
+    box-shadow: none;
     opacity: 1;
     visibility: visible;
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height var(--duration-base) var(--ease-out);
   }
-  
-  .def-menu__item:focus-within .def-dropdown,
-  .def-menu__item:hover .def-dropdown {
-    max-height: 400px;
-    visibility: visible;
-    opacity: 1;
+
+  .def-dropdown__item,
+  .def-dropdown a {
+    display: block;
+    padding: var(--space-sm) var(--space-md);
+    font-size: 0.9rem;
+    opacity: 0.85;
   }
-  
+
   .def-footer__inner {
     grid-template-columns: 1fr 1fr;
   }
-  
+
   .def-footer__brand {
     grid-column: span 2;
   }
-  
+
   .def-footer__bottom {
     flex-direction: column;
     gap: var(--space-md);
     text-align: center;
+  }
+}
+
+/* === RESPONSIVE TABLES === */
+@media (max-width: 768px) {
+  .def-content table,
+  .def-article table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    max-width: 100%;
+    white-space: nowrap;
+  }
+
+  .def-content table th,
+  .def-content table td,
+  .def-article table th,
+  .def-article table td {
+    white-space: normal;
+    min-width: 8rem;
+  }
+}
+
+/* === MOBILE ARTICLE PADDING === */
+@media (max-width: 768px) {
+  .def-article,
+  .def-content {
+    padding: var(--space-lg) var(--space-md);
+  }
+
+  .def-article h1,
+  .def-content h1 {
+    font-size: 1.75rem;
+    line-height: 1.2;
+  }
+
+  .def-article h2,
+  .def-content h2 {
+    font-size: 1.4rem;
+  }
+}
+
+/* === SMALL PHONE BREAKPOINT === */
+@media (max-width: 480px) {
+  .def-article,
+  .def-content {
+    padding: var(--space-md);
+    font-size: 0.95rem;
+  }
+
+  .def-article h1,
+  .def-content h1 {
+    font-size: 1.5rem;
   }
 }
