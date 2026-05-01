@@ -84,36 +84,20 @@
         <span class="def-logo__icon">⚡</span>
         {{ site.name }}
       </a>
+      {% set categories = ["Intelligence", "Maritime", "OSINT", "Analysis"] %}
       <ul class="def-menu">
+        {% for cat in categories %}
         <li class="def-menu__item">
-          <a href="/llm-adoption-defense/" class="def-menu__link">Intelligence</a>
+          <a href="#" class="def-menu__link">{{ cat }}</a>
           <div class="def-dropdown">
-            <a href="/llm-adoption-defense/" class="def-dropdown__item">The State of LLM Adoption in Defense</a>
-            <a href="/threat-report-generation-ai/" class="def-dropdown__item">Threat Report Generation</a>
+            {% for article in collections.articles %}
+            {% if article.data.category == cat %}
+            <a href="{{ article.url }}" class="def-dropdown__item">{{ article.data.navTitle or article.data.title }}</a>
+            {% endif %}
+            {% endfor %}
           </div>
         </li>
-        <li class="def-menu__item">
-          <a href="/maritime-domain-awareness-ai/" class="def-menu__link">Maritime</a>
-          <div class="def-dropdown">
-            <a href="/maritime-domain-awareness-ai/" class="def-dropdown__item">Maritime Domain Awareness: AI's Growing Role</a>
-          </div>
-        </li>
-        <li class="def-menu__item">
-          <a href="/osint-automation-defense/" class="def-menu__link">OSINT</a>
-          <div class="def-dropdown">
-            <a href="/osint-automation-defense/" class="def-dropdown__item">OSINT Automation in Defense</a>
-          </div>
-        </li>
-        <li class="def-menu__item">
-          <a href="/nlp-intelligence-analysis/" class="def-menu__link">Analysis</a>
-          <div class="def-dropdown">
-            <a href="/is-singapore-stronger-than-malaysias-military/" class="def-dropdown__item">Is Singapore Stronger Than Malaysia's Military?</a>
-            <a href="/rag-classified-document-search/" class="def-dropdown__item">RAG Systems for Classified Document Search</a>
-            <a href="/nlp-intelligence-analysis/" class="def-dropdown__item">NLP in Intelligence Analysis</a>
-            <a href="/llm-evaluation-defense/" class="def-dropdown__item">LLM Evaluation for Defense</a>
-            <a href="/signals-intelligence-ai/" class="def-dropdown__item">Signals Intelligence and AI</a>
-          </div>
-        </li>
+        {% endfor %}
         <li class="def-menu__item">
           <a href="/about/" class="def-menu__link">About</a>
         </li>
