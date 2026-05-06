@@ -44,8 +44,8 @@
       {
         "@type": "ListItem",
         "position": {{ loop.index }},
-        "name": "{{ crumb.name }}",
-        "item": "{{ crumb.url }}"
+        "name": "{{ crumb.name | safe }}",
+        "item": "{{ crumb.url | safe }}"
       }{% if not loop.last %},{% endif %}
       {% endfor %}
     ]
