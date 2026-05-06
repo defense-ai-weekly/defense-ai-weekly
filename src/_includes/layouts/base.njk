@@ -63,10 +63,10 @@
       {% for faq in faqs %}
       {
         "@type": "Question",
-        "name": "{{ faq.question | safe }}",
+        "name": {{ faq.question | dump }},
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "{{ faq.answer | safe }}"
+          "text": {{ faq.answer | dump }}
         }
       }{% if not loop.last %},{% endif %}
       {% endfor %}
